@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: row;
   min-height: 100vh;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 .list {
@@ -13,6 +14,7 @@
   flex-wrap: nowrap;
   flex-direction: column;
   align-items: center;
+  min-width: 500px;
 }
 
 .listItem {
@@ -21,4 +23,9 @@
   width: 200px;
   text-align: center;
   margin: 10px;
+  cursor: pointer;
+}
+
+.detailInfo {
+  min-width: 500px;
 }

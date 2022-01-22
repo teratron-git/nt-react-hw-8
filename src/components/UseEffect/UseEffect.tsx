@@ -4,22 +4,28 @@ import Details from "./Details"
 import List from "./List"
 import st from "./UseEffect.module.css"
 
-interface IProps {
-  task: string
-  onChangeHandler: (e: any) => void
+export interface IDetailInfo {
+  avatar: string
+  details: {
+    city: string
+    company: string
+    position: string
+  }
+  id: number
+  name: string
 }
 
 const UseEffect = () => {
   const [data, setData] = useState([])
-  const [detailInfo, setDetailInfo] = useState({})
-  console.log("🚀 ~ file: UseEffect.tsx ~ line 14 ~ UseEffect ~ data", data)
-  console.log("🚀 ~ file: UseEffect.tsx ~ line 15 ~ UseEffect ~ detailInfo", detailInfo)
+  const [detailInfo, setDetailInfo] = useState<IDetailInfo>(null)
+  const [currentId, setCurrentId] = useState(null)
+  const [isLoading, setIsLoading] = useState(false)
+  const [isLoadingId, setIsLoadingId] = useState(false)
 
   async function getData(url: string) {
     try {
       const response = await axios.get(url)
       const result = await response.data
-      console.log("🚀 ~ file: UseEffect.tsx ~ line 22 ~ getdata ~ result", result)
 
       return result
     } catch (error) {
@@ -29,31 +35,40 @@ const UseEffect = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true)
       const response = await getData(
         "https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/users.json"
       )
-      console.log("🚀 ~ file: UseEffect.tsx ~ line 34 ~ useEffect ~ response!!!", response)
-
       setData(response)
+      setIsLoading(false)
     }
+
     fetchData()
   }, [])
 
-  const onClickHandler = (id: number): void => {
-    const fetchData = async () => {
-      const response = await getData(
-        `https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${id}.json`
-      )
-      console.log("🚀 ~ file: UseEffect.tsx ~ line 34 ~ useEffect ~ response!!!", response)
-      setDetailInfo(response)
+  useEffect(() => {
+    if (currentId) {
+      const fetchData = async () => {
+        setIsLoadingId(true)
+        const response = await getData(
+          `https://raw.githubusercontent.com/netology-code/ra16-homeworks/master/hooks-context/use-effect/data/${currentId}.json`
+        )
+        setDetailInfo(response)
+        setIsLoadingId(false)
+      }
+
+      fetchData()
     }
-    fetchData()
+  }, [currentId])
+
+  const onClickHandler = (id: number): void => {
+    setCurrentId(id)
   }
 
   return (
     <div className={st.container}>
-      <List data={data} onClickHandler={onClickHandler} />
-      <Details detailInfo={detailInfo} />
+      <div className={st.list}>{isLoading ? <span>Loading...</span> : <List data={data} onClickHandler={onClickHandler} />}</div>
+      <div className={st.detailInfo}>{isLoadingId ? <span>Loading...</span> : <Details detailInfo={detailInfo} />}</div>
     </div>
   )
 }
