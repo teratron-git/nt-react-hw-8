@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "./App.css"
+import CustomHook from "./components/CustomHook"
 import TaskSwitcher from "./components/TaskSwitcher"
 import UseEffect from "./components/UseEffect"
 
@@ -16,7 +17,7 @@ const App = () => {
 
       {task == "1" && <UseEffect />}
 
-      {/* {task == "2" && <Steps />} */}
+      {task == "2" && <CustomHook />}
 
       {task == "3" && <>Task 3</>}
     </>

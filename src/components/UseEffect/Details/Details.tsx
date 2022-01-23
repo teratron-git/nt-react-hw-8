@@ -2,8 +2,6 @@ import { IDetailInfo } from "../UseEffect"
 import st from "../UseEffect.module.css"
 
 const UseEffect = (props: { detailInfo: IDetailInfo }) => {
-  console.log("🚀 ~ file: Details.tsx ~ line 7 ~ UseEffect ~ props", props)
-
   return (
     <>
       {props.detailInfo && (

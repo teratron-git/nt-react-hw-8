@@ -6,8 +6,6 @@ interface IProps {
 }
 
 const List = (props: IProps) => {
-  console.log("🚀 ~ file: List.tsx ~ line 9 ~ UseEffect ~ props", props)
-
   return (
     <>
       {props.data.map((item) => (

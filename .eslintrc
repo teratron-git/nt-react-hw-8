@@ -50,7 +50,7 @@
     "no-shadow": "warn",
     "default-case": "warn",
     "import/no-mutable-exports": "warn",
-    "react/jsx-no-useless-fragment": "warn",
+    "react/jsx-no-useless-fragment": "off",
     "no-restricted-syntax": "off",
     "prefer-const": "warn",
     "no-useless-constructor": "warn",
@@ -76,8 +76,7 @@
     "prefer-arrow-callback": "warn",
     "react/function-component-definition": ["warn", { "namedComponents": "arrow-function" }],
     "no-restricted-exports": "off",
-    "react/no-unused-prop-types": "warn",
-    "react/jsx-no-useless-fragment": "off"
+    "react/no-unused-prop-types": "warn"
   },
   "ignorePatterns": ["build/"]
 }
